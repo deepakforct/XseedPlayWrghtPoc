@@ -3,7 +3,7 @@ const { chromium } = require('playwright');
 const { CESAddProject } = require('../models/CESAddProject');
 const { LoginPage } = require('../models/LoginPage');
 const { CESHomePage } = require('../models/CESHomePage');
-var robot = require("robotjs");
+//var robot = require("robotjs");
 const {getAccessToken} = require('../utils/auth');
 const { createAnIALessonPlan } = require("../utils/createIALP");
 
@@ -14,7 +14,7 @@ const { createAnIALessonPlan } = require("../utils/createIALP");
 // });
 
 test('Login to XSeed Library', async () => {
-  //await createAnIALessonPlan();
+  await createAnIALessonPlan();
   const browser = await chromium.launch({headless: false});
   const context = await browser.newContext({
     javaScriptEnabled: true
@@ -30,14 +30,14 @@ test('Login to XSeed Library', async () => {
 
 //Home Page
   const homePage=new CESHomePage(page);
-  //await homePage.clickAddProject();
+  await homePage.clickAddProject();
 
 //Add Project 
    const addProjectPage = new CESAddProject(page);
-  // await addProjectPage.addprojectdetails('.v-list-item__title >> text=2020', '.v-list-item__title >> text=XSEED One India','.v-list-item__title >> text=English', '.v-list-item__title >> text=1' );
-  // var projectName = await addProjectPage.addprojecttypedetails('text=TTCBEN109 - Describing an Animal', '.v-list-item__title >> text=TestAutomation');
-  // await addProjectPage.addVerifierDetails("Kaushal Mishra");
-  // await page.click(addProjectPage.saveButton);
+  await addProjectPage.addprojectdetails('.v-list-item__title >> text=2020', '.v-list-item__title >> text=XSEED One India','.v-list-item__title >> text=English', '.v-list-item__title >> text=1' );
+  var projectName = await addProjectPage.addprojecttypedetails('text=TTCBEN109 - Describing an Animal', '.v-list-item__title >> text=TestAutomation');
+  await addProjectPage.addVerifierDetails("Kaushal Mishra");
+  await page.click(addProjectPage.saveButton);
 
 //Search and Publish Created project
   homePage.search("TestAutomation_4yaw");
@@ -45,9 +45,9 @@ test('Login to XSeed Library', async () => {
   await addProjectPage.waitandclick('button >> text=View');
   await addProjectPage.waitandclick('button >> text=View');
   await page.waitForSelector('button:has-text("ASSETS")');
-  await page.setInputFiles('');
+  //await page.setInputFiles('');
   await page.click('div.image-upload label img');
-  await robot.typeString("C:\Users\deepak\Downloads\download.jpg");
+ // await robot.typeString("C:\Users\deepak\Downloads\download.jpg");
   //await browser.close();
   await page.pause();
 });
