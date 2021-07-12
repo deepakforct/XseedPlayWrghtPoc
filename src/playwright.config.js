@@ -1,16 +1,16 @@
 module.exports = {
-    timeout: 50000,
-    use: {
-      // Browser options
-      headless: false,
-      slowMo: 100,
-  
-      // Context options
-      viewport: { width: 1366, height: 768 },
-      ignoreHTTPSErrors: true,
-  
-      // Artifacts
-      screenshot: 'only-on-failure',
-     // video: 'retry-with-video',
-    },
-  };
+  timeout: 250000,
+  use: {
+    // Browser options
+    headless: false,
+    slowMo: 50,
+
+    // Context options
+    viewport: { width: 1280, height: 720 },
+    ignoreHTTPSErrors: true,
+
+    // Artifacts
+    screenshot: 'only-on-failure',
+    video: 'retry-with-video',
+  },
+};

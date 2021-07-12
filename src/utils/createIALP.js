@@ -34,7 +34,7 @@ async function createAnIALessonPlan(){
     .set('Content-Type', 'application/json')
     .send(buildlinkLPtoBlockBody())
     console.log(response.body);
-    return 
+    return;
 }
 
 

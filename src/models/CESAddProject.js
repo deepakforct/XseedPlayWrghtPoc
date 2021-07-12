@@ -20,7 +20,8 @@ class CESAddProject{
     nextButtonProjectType = ':nth-match(button:has-text("Next"), 2)';
 
     //Uploader, Reviewer and Approver section
-    assetUploaderDropDown ='text = ​Asset Uploader >> input[type="text"]'; 
+    editorDropDown = 'text=​Editor >> input[type="text"]';
+    assetUploaderDropDown ='text=​Asset Uploader >> input[type="text"]'; 
     assetAuthorizerDropDown ='text=​Asset Authorizer >> input[type="text"]'; 
     proofReaderDropDown = 'text=​Proof Reader >> input[type="text"]';
     saveButton = 'button:has-text("Save")';
@@ -45,21 +46,28 @@ class CESAddProject{
         await this.page.click(lessonPlan);
         await this.page.press(this.lessonPlanDropDown, 'Escape');
         var projectName = utilityMethods.randomString();
-        var projectName = utilityMethods.randomString();
         await this.page.fill(this.projectName, ("XSEED One India G1 ENG Blk (10) - Describing an Animal - " +  projectName));
         await this.page.click(this.nextButtonProjectType);
         return projectName;
     }
 
     async addVerifierDetails(textValue) {
+        await this.clicknfill(this.editorDropDown, textValue);
         await this.typeandenter(this.assetAuthorizerDropDown, textValue);
         await this.typeandenter(this.assetUploaderDropDown, textValue);
         await this.typeandenter(this.proofReaderDropDown, textValue);
     }
 
     async waitandclick(selector){
+        console.log("inside wait n click for " + selector);
         await this.page.waitForSelector(selector);
         await this.page.click(selector);
+    }
+
+    async clicknfill(selector, textValue){
+        await this.page.click(selector);
+        await this.page.fill(selector, textValue);
+        await this.page.press(selector, 'Enter');
     }
 
     async typeandenter(selector, textValue){
